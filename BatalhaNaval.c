@@ -34,7 +34,6 @@ int main(){
         printf("  %c", col);
         col++;
     }
-
     for (int i = 0; i < 10; i++){
         //rótulos das linhas
         if(lin < 10){
