@@ -1,11 +1,10 @@
 #include <stdio.h>
 
 int main(){
-    int tabuleiro[10][10], lin = 1, end = 0;
-    int navio1[3] = {3, 3, 3};
-    int navio2[3] = {3, 3, 3};
-    int coord1[3] = {4, 4, 0}; //primeiro valor é a linha onde começa o navio, o segundo é a coluna onde começa o navio e o terceiro valor o posicionamento. 0 para vertical e 1 para horizontal
-    int coord2[3] = {3, 3, 1};
+
+    //Nos vetores coord1 e coord2 primeiro e o segundo valor são respectivamente a linha e a coluna onde começa o navio.
+    //O terceiro valor é referente o posicionamento (0 para vertical e 1 para horizontal)
+    int tabuleiro[10][10], navio1[3] = {3, 3, 3}, navio2[3] = {3, 3, 3}, coord1[3] = {4, 4, 0}, coord2[3] = {3, 3, 1}, lin = 1, end = 0;
     char col = 'A';
     
     //inicialização da matriz tabuleiro
@@ -35,6 +34,7 @@ int main(){
             //se a coordenada já estiver ocupada (diferente de zero) alerta que os navios estão sobrepondo-se, encerra o loop e muda a variável de controle end para 1.
             if(tabuleiro[coord2[0]][coord2[1]] !=0){
                 printf("ATENÇÃO!! Os navios estão se sobrepondo.\n\n");
+                end = 1;
                 break;
             } else{
                 tabuleiro[coord2[0]][coord2[1]] = navio2[i];
@@ -83,9 +83,9 @@ int main(){
             }
         }
         printf("\n\n\n");
-} else{
-    printf("Encerrando o jogo!\n\n");
-}
+    } else{
+        printf("Encerrando o jogo!\n\n");
+    }
     
     return 0;
 }
