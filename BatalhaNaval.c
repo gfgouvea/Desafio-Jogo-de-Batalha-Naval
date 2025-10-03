@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 void imprimetabuleiro (int tabuleiro[10][10]){
     
@@ -28,8 +29,8 @@ void posicionanavio(int coordnavio[3], int tabuleiro[10][10]){
             //se a coordenada já estiver ocupada (diferente de zero) alerta que os navios estão sobrepondo-se e encerra o loop.
             //caso contrário (else), insere no tabuleiro a coordenada do navio na posição indicada no vetor coordnavio, usando incremento na lina.
             if(tabuleiro[coordnavio[0]][coordnavio[1]] !=0 || coordnavio[0] > 9 || coordnavio[1] > 9){
-                printf("\nATENÇÃO!! Os navios estão se sobrepondo ou estão sendo colocados fora do tabuleiro.\n");
-                break;
+                printf("ATENÇÃO!! Os navios estão se sobrepondo ou estão sendo colocados fora do tabuleiro.\n\n\n");
+				exit(0);
             } else{
                 tabuleiro[coordnavio[0]][coordnavio[1]] = navio[i];
 			    coordnavio[0]++;
@@ -39,8 +40,8 @@ void posicionanavio(int coordnavio[3], int tabuleiro[10][10]){
             //se a coordenada já estiver ocupada (diferente de zero) alerta que os navios estão sobrepondo-se e encerra o loop.
             //caso contrário (else), insere no tabuleiro a coordenada do navio na posição indicada no vetor coordnavio, usando incremento na coluna.
             if(tabuleiro[coordnavio[0]][coordnavio[1]] != 0 || coordnavio[0] > 9 || coordnavio[1] > 9){
-                printf("\nATENÇÃO!! Os navios estão se sobrepondo ou estão sendo colocados fora do tabuleiro.\n");
-                break;
+                printf("ATENÇÃO!! Os navios estão se sobrepondo ou estão sendo colocados fora do tabuleiro.\n\n\n");
+				exit(0);
             } else {
                 tabuleiro[coordnavio[0]][coordnavio[1]] = navio[i];
 			    coordnavio[1]++;
@@ -50,8 +51,8 @@ void posicionanavio(int coordnavio[3], int tabuleiro[10][10]){
             //se a coordenada já estiver ocupada (diferente de zero) alerta que os navios estão sobrepondo-se e encerra o loop.
             //caso contrário (else), insere no tabuleiro a coordenada do navio na posição indicada no vetor coordnavio, usando incremento na linha e na coluna.
             if(tabuleiro[coordnavio[0]][coordnavio[1]] != 0 || coordnavio[0] > 9 || coordnavio[1] > 9){
-                printf("\nATENÇÃO!! Os navios estão se sobrepondo ou estão sendo colocados fora do tabuleiro.\n");
-                break;
+                printf("ATENÇÃO!! Os navios estão se sobrepondo ou estão sendo colocados fora do tabuleiro.\n\n\n");
+				exit(0);
             } else {
                 tabuleiro[coordnavio[0]][coordnavio[1]] = navio[i];
                 coordnavio[0]++;
@@ -62,8 +63,8 @@ void posicionanavio(int coordnavio[3], int tabuleiro[10][10]){
             //se a coordenada já estiver ocupada (diferente de zero) alerta que os navios estão sobrepondo-se, encerra o loop e muda a variável de controle end para 1.
             //caso contrário (else), insere no tabuleiro a coordenada do navio na posição indicada no vetor coordnavio, usando incremento na linha e decremento na coluna.
             if(tabuleiro[coordnavio[0]][coordnavio[1]] != 0 || coordnavio[0] > 9 || coordnavio[1] > 9){
-                printf("\nATENÇÃO!! Os navios estão se sobrepondo ou estão sendo colocados fora do tabuleiro.\n");
-                break;
+                printf("ATENÇÃO!! Os navios estão se sobrepondo ou estão sendo colocados fora do tabuleiro.\n\n\n");
+				exit(0);
             } else {
                 tabuleiro[coordnavio[0]][coordnavio[1]] = navio[i];
                 coordnavio[0]++;
@@ -91,15 +92,18 @@ void disparahabilidade(int coordhab[3], int habilidade[3][5], int tabuleiro[10][
 	//Esse bloco de código testa se o efeito de cada habilidade está totalmente dentro do tabuleiro.
 	if(coordhab[2] == 0){
 		if(coordhab[0] > 7 || coordhab[1] < 2 || coordhab[1] > 7){
-			printf("\nA área de efeito do cone está total ou parcialmente fora do tabuleiro.\n");
+			printf("A área de efeito do cone está total ou parcialmente fora do tabuleiro.\n\n\n");
+			exit(0);
 		}
 	}else if(coordhab[2] == 1){
 		if(coordhab[0] < 1 || coordhab[0] > 8 || coordhab[1] < 2 || coordhab[1] > 7){
-			printf("\nA área de efeito da cruz está total ou parcialmente fora do tabuleiro.\n");
+			printf("A área de efeito da cruz está total ou parcialmente fora do tabuleiro.\n\n\n");
+			exit(0);
 		}
 		}else{
 			if(coordhab[0] < 1 || coordhab[0] > 8 || coordhab[1] < 1 || coordhab[1] > 8){
-				printf("\nA área de efeito do octaedro está total ou parcialmente fora do tabuleiro.\n");
+				printf("A área de efeito do octaedro está total ou parcialmente fora do tabuleiro.\n\n\n");
+				exit(0);
 			}
 		}
 	
@@ -116,9 +120,12 @@ void disparahabilidade(int coordhab[3], int habilidade[3][5], int tabuleiro[10][
 
 int main(){
 	
-	//declaração das matrizes de habilidades e o tabuleiro.
+	//declaração das matrizes de habilidades e do tabuleiro.
     int tabuleiro[10][10];
     int cone[3][5], cruz[3][5], octa[3][5];
+
+	//variável para armazenar a opção do menu.
+	int op;
     
     //Estes vetores armazenam as coodenadas onde serão colocados os navios.
     //O primeiro valor é a linha, o segundo valor é a coluna e o terceiro é o posicionamento:
@@ -126,7 +133,7 @@ int main(){
     int coordnavio1[3] = {0, 0, 0};
     int coordnavio2[3] = {0, 2, 1};
     int coordnavio3[3] = {1, 7, 2};
-    int coordnavio4[3] = {6, 9, 3};
+    int coordnavio4[3] = {6, 8, 3};
     
     //Estas vetores armazenam as coodenadas do ponto de origem das habilidades.
 	////O primeiro valor é a linha, o segundo valor é a coluna e o terceiro valor identifica a habilidade (para dentro da função)
@@ -161,6 +168,7 @@ int main(){
 	
 	/*Exibição das matrizes cone, cruz e octa.
 	Esse código foi gerado apenas para fins de visualização durante o desenvolvimento da atividade.
+	Este código se ficar descomentado mostra as matrizes de habilidades impressas antes do tabuleioro vazio.
     for (int i = 0; i < 3; i++){
     	printf("\n");
     	for (int j = 0; j < 5; j++) {
@@ -193,22 +201,53 @@ int main(){
         }
     }
     
-    //Para economizar espaço vertical, optei por criar, como funções, as lógicas que se repetem.
-    //As funções utilizam informações inicializadas nos vetores descritos anteriormente.
-    imprimetabuleiro(tabuleiro);
+	//aqui começa o menu principal do jogo.
+	//A cada ação que modifica o tabuleiro ele éexibido novamente.
+	printf("============================================================\n");
+	printf("		  BATALHA NAVAL\n");
+	printf("Oceanic Games 2025 - Todos os direitos reservados.\n");
+	printf("============================================================\n\n");
+	printf("Menu Principal\n\n");
 
-    posicionanavio(coordnavio1, tabuleiro);
-	posicionanavio(coordnavio2, tabuleiro);
-	posicionanavio(coordnavio3, tabuleiro);
-	posicionanavio(coordnavio4, tabuleiro);
-	
-	imprimetabuleiro(tabuleiro);
-	
-	disparahabilidade(coordcone, cone, tabuleiro);
-	disparahabilidade(coordcruz, cruz, tabuleiro);
-	disparahabilidade(coordocta, octa, tabuleiro);
-    
-    imprimetabuleiro(tabuleiro);
-    
-    return 0;
+	printf("[1] Iniciar o jogo\n");
+	printf("[2] Sair do jogo\n\n");
+	printf("Escolha uma opção: ");
+	scanf("%d", &op);
+
+	//Para economizar espaço vertical, optei por criar, como funções, as lógicas que se repetem.
+    //As funções utilizam informações inicializadas nos vetores descritos anteriormente.
+
+	switch (op){
+		case 1:
+			printf("\nEste é o tabuleiro que jogaremos. Dez linhas por dez colunas.\n\n");
+			imprimetabuleiro(tabuleiro);
+
+			printf("\nOs navios no campo de batalha serão identificados pelo número 3.\n");
+			printf("Posicionando os navios...\n\n");
+
+			posicionanavio(coordnavio1, tabuleiro);
+			posicionanavio(coordnavio2, tabuleiro);
+			posicionanavio(coordnavio3, tabuleiro);
+			posicionanavio(coordnavio4, tabuleiro);
+
+			imprimetabuleiro(tabuleiro);
+
+			printf("\nOs efeitos das habilidades serão identificados pelo número 5.\n");
+			printf("Disparando as habilidades...\n\n");
+
+			disparahabilidade(coordcone, cone, tabuleiro);
+			disparahabilidade(coordcruz, cruz, tabuleiro);
+			disparahabilidade(coordocta, octa, tabuleiro);
+
+			imprimetabuleiro(tabuleiro);
+			printf("\n\nObrigado por jogar! Saindo...\n\n\n");
+		break;
+		case 2:
+			printf("\n\n\nObrigado por jogar! Saindo...\n\n\n");
+			return 0;
+		break;
+		default:
+			break;
+	}
+return 0;
 }
